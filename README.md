@@ -90,7 +90,7 @@ tcp://<HA-IP>:10700
 ## 🙏 Credits
 
 - Engine: [`rhasspy/wyoming-satellite`](https://github.com/rhasspy/wyoming-satellite)  
-- Packaging for HA OS: **Even Løland Kestilæ**
+- Packaging for HA OS: **Evenlk**
 
 ---
 
