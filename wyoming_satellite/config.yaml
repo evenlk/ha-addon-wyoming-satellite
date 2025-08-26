@@ -1,1 +1,30 @@
-version: 0.1.5
+name: "Wyoming Satellite (Local)"
+slug: "wyoming_satellite"
+version: "0.1.5"
+description: "Wyoming Satellite using HA Audio (PulseAudio) mic capture."
+arch:
+  - aarch64
+  - amd64
+  - armv7
+startup: services
+boot: auto
+audio: true
+init: false
+ports:
+  "10700/tcp": 10700
+ports_description:
+  "10700/tcp": "Wyoming Satellite TCP"
+options:
+  uri: "tcp://0.0.0.0:10700"
+  mic_command: "parec --latency-msec=50 --format=s16le --rate=16000 --channels=1"
+  snd_command: "cat"
+  wake_uri: "tcp://core-openwakeword:10400"
+  wake_word_name: "hey_jarvis"
+  debug: true
+schema:
+  uri: str
+  mic_command: str
+  snd_command: str
+  wake_uri: str
+  wake_word_name: str
+  debug: bool
