@@ -1,4 +1,4 @@
-name: "Wyoming Satellite (Local)"
+name: "Wyoming Satellite"
 slug: "wyoming_satellite"
 version: "0.1.5"
 description: "Wyoming Satellite using HA Audio (PulseAudio) mic capture."
