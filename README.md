@@ -4,7 +4,7 @@
 Run the upstream [`rhasspy/wyoming-satellite`](https://github.com/rhasspy/wyoming-satellite) engine inside **Home Assistant OS** with HA Audio (PulseAudio) mic capture.  
 Works on `aarch64`, `amd64`, and `armv7`. Default port: **10700/tcp**.
 
-[![Open this repository in Home Assistant](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fevenlk%2Fha-addon-wyoming-satellite)  
+[![Open this repository in Home Assistant](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https://github.com/evenlk/ha-addon-wyoming-satellite)  
 [![Buy Me A Coffee](https://img.shields.io/badge/%E2%98%95%EF%B8%8F-Buy%20me%20a%20coffee-yellow?logo=buymeacoffee)](https://buymeacoffee.com/evenlk)
 
 ---
@@ -51,7 +51,7 @@ Use these names in your config options (see below).
 ## 🚀 Install
 
 **Option A: Add the repo via one click**  
-[![Open this repository in Home Assistant](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fevenlk%2Fha-addon-wyoming-satellite)
+[![Open this repository in Home Assistant](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)]([https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https://github.com/evenlk/ha-addon-wyoming-satellite])
 
 **Option B: Manually**  
 1. In Home Assistant: **Settings → Add-ons → Add-on Store → ⋮ → Repositories → Add**  
