@@ -1,9 +1,10 @@
+
 # Wyoming Satellite — Home Assistant Add-on
 
 Run the upstream [`rhasspy/wyoming-satellite`](https://github.com/rhasspy/wyoming-satellite) engine inside **Home Assistant OS** with HA Audio (PulseAudio) mic capture.  
 Works on `aarch64`, `amd64`, and `armv7`. Default port: **10700/tcp**.
 
-[![Open this repository in Home Assistant](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fevenlk%2Fha-addon-wyoming-satellite)
+[![Open this repository in Home Assistant](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fevenlk%2Fha-addon-wyoming-satellite)  
 [![Buy Me A Coffee](https://img.shields.io/badge/%E2%98%95%EF%B8%8F-Buy%20me%20a%20coffee-yellow?logo=buymeacoffee)](https://buymeacoffee.com/evenlk)
 
 ---
@@ -23,7 +24,27 @@ Works on `aarch64`, `amd64`, and `armv7`. Default port: **10700/tcp**.
 
 4. (Optional) A speaker output for feedback/announcements.
 
-> Tip: Verify your microphone and speaker devices in **Settings → System → Hardware → Audio**.
+---
+
+## 🎤 Microphone discovery
+
+This add-on will work with **any audio input device that HA OS can detect** — USB mics, built-in mics, sound cards, even webcam/HDMI mics.
+
+To list available devices:
+
+1. Install the **Advanced SSH & Web Terminal** add-on (Community add-ons).  
+2. Run the command:
+   ```bash
+   ha audio info
+   ```
+3. You’ll see a list of **sources** (microphones) and **sinks** (speakers).  
+   Example:
+   ```
+   source: alsa_input.usb-0d8c_USB_Sound_Device-00.analog-stereo
+   sink: alsa_output.pci-0000_00_1b.0.analog-stereo
+   ```
+
+Use these names in your config options (see below).
 
 ---
 
@@ -35,29 +56,29 @@ Works on `aarch64`, `amd64`, and `armv7`. Default port: **10700/tcp**.
 **Option B: Manually**  
 1. In Home Assistant: **Settings → Add-ons → Add-on Store → ⋮ → Repositories → Add**  
 2. Paste this URL: `https://github.com/evenlk/ha-addon-wyoming-satellite`  
-3. Install **Wyoming Satellite** and start it.
+3. Install **Wyoming Satellite** and start the add-on.
 
 ---
 
 ## ⚙️ Configuration (Add-on options)
 
 ```yaml
-uri: "tcp://0.0.0.0:10700"                     # --uri
-mic_command: "parec --latency-msec=50 --format=s16le --rate=16000 --channels=1"
-snd_command: "cat"
+uri: "tcp://0.0.0.0:10700"                     
+mic_command: 'parec --device="alsa_input.usb-XXXX" --latency-msec=50 --format=s16le --rate=16000 --channels=1'
+snd_command: 'paplay --device="alsa_output.usb-YYYY" -'
 wake_uri: "tcp://core-openwakeword:10400"
 wake_word_name: "hey_jarvis"
 debug: true
 ```
 
+Replace `alsa_input...` / `alsa_output...` with the names from `ha audio info`.
+
 ### 🔊 Add a speaker (audio out)
-If you want sound output from the satellite, set `snd_command` to pipe PCM data to a speaker, e.g.:
-
+If you want sound output from the satellite, set `snd_command` to your audio sink.  
+Example:
 ```yaml
-snd_command: "paplay --device=<your_output_device> -"
+snd_command: "paplay --device=alsa_output.pci-0000_00_1b.0.analog-stereo -"
 ```
-
-List your devices in **Settings → System → Hardware → Audio**.
 
 ---
 
@@ -73,10 +94,10 @@ tcp://<HA-IP>:10700
 
 ## 🔧 Troubleshooting
 
-- **No mic input?** Check **Hardware → Audio**; set the right source with `parec --device=<source>`  
-- **Wake word not triggering?** Verify `wake_uri` resolves (default `core-openwakeword:10400`); try another `wake_word_name`  
-- **No sound?** Update `snd_command` with a valid output device and test with `paplay /usr/share/sounds/alsa/Front_Center.wav`  
-- **Need more logs?** Set `debug: true`
+- **No mic input?** → Run `ha audio info` and make sure `mic_command` matches the correct source.  
+- **Wake word not triggering?** → Verify `wake_uri` resolves (default `core-openwakeword:10400`); try another `wake_word_name`.  
+- **No sound?** → Point `snd_command` to a valid sink and test with `paplay /usr/share/sounds/alsa/Front_Center.wav`.  
+- **Need more logs?** → Set `debug: true`.
 
 ---
 
@@ -90,7 +111,7 @@ tcp://<HA-IP>:10700
 ## 🙏 Credits
 
 - Engine: [`rhasspy/wyoming-satellite`](https://github.com/rhasspy/wyoming-satellite)  
-- Packaging for HA OS: **Evenlk**
+- Add-on packaging for HA OS: **evenlk**
 
 ---
 
