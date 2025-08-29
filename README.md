@@ -29,6 +29,7 @@ Works on `aarch64`, `amd64`, and `armv7`. Default port: **10700/tcp**.
 ## 🎤 Microphone discovery
 
 This add-on will work with **any audio input device that HA OS can detect** — USB mics, built-in mics, sound cards, even webcam/HDMI mics.
+It will automatically discover your devices (drop down menu in the configuration page). If you have issues, you can manually set them.
 
 To list available devices:
 
@@ -71,7 +72,7 @@ wake_word_name: "hey_jarvis"
 debug: true
 ```
 
-Replace `alsa_input...` / `alsa_output...` with the names from `ha audio info`.
+Replace `alsa_input...` / `alsa_output...` with the names from `ha audio info`. You only need to do this if auto-discovery doesn't work. (check devices discovered in the configuration page)
 
 ### 🔊 Add a speaker (audio out)
 If you want sound output from the satellite, set `snd_command` to your audio sink.  
